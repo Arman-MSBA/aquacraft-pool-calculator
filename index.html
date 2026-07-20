@@ -48,7 +48,6 @@
           <option value="ton">Մետրիկ տոննա</option>
           <option value="m3">Խորանարդ մետր (մ³)</option>
           <option value="liter">Լիտր</option>
-          <option value="gallon">ԱՄՆ գալոն</option>
         </select>
       </div>
       <div class="products">
@@ -78,7 +77,7 @@
   <script>
     const volume = document.querySelector('#volume');
     const unit = document.querySelector('#unit');
-    const factors = { ton: 1, m3: 1, liter: 0.001, gallon: 0.003785411784 };
+    const factors = { ton: 1, m3: 1, liter: 0.001 };
     const doses = {
       algInitial: 15,
       algWeekly: 5,

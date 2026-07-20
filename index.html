@@ -8,33 +8,39 @@
     :root { color-scheme: light; --navy:#073b4c; --blue:#0b91c6; --pale:#eaf8fc; --line:#c7e4ec; --ink:#102a33; }
     * { box-sizing: border-box; }
     body { margin:0; min-height:100vh; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--ink); background:linear-gradient(145deg,#f8fdff,#dff5fa); }
-    main { width:min(720px,calc(100% - 28px)); margin:0 auto; padding:36px 0 56px; }
+    main { width:min(1180px,calc(100% - 32px)); min-height:100vh; margin:0 auto; padding:24px 0; display:grid; grid-template-columns:300px minmax(0,1fr); gap:24px; align-items:center; }
+    .intro { padding:20px 8px; }
     .brand { color:var(--blue); font-size:.82rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
-    h1 { margin:8px 0 8px; color:var(--navy); font-size:clamp(2rem,6vw,3.5rem); line-height:1; }
-    .sub { margin:0 0 28px; color:#46646e; font-size:1.05rem; }
-    .card { background:#fff; border:1px solid rgba(7,59,76,.1); border-radius:24px; padding:clamp(20px,5vw,34px); box-shadow:0 20px 60px rgba(7,59,76,.12); }
+    h1 { margin:10px 0 14px; color:var(--navy); font-size:clamp(2rem,4vw,3rem); line-height:1.05; }
+    .sub { margin:0 0 22px; color:#46646e; font-size:1rem; line-height:1.55; }
+    .card { background:#fff; border:1px solid rgba(7,59,76,.1); border-radius:24px; padding:24px; box-shadow:0 20px 60px rgba(7,59,76,.12); }
     label { display:block; margin-bottom:8px; font-weight:750; color:var(--navy); }
-    .row { display:grid; grid-template-columns:1fr 170px; gap:12px; margin-bottom:22px; }
+    .row { display:grid; grid-template-columns:1fr 190px; gap:12px; margin-bottom:18px; }
     input,select { width:100%; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--ink); padding:14px; font:inherit; }
     input { font-size:1.2rem; font-weight:700; }
     input:focus,select:focus { outline:3px solid rgba(11,145,198,.18); border-color:var(--blue); }
     .products { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .product { border:1px solid var(--line); border-radius:18px; padding:18px; background:var(--pale); }
-    .product h2 { margin:0 0 15px; font-size:1.15rem; color:var(--navy); }
-    .dose { background:#fff; border-radius:13px; padding:13px; margin-top:10px; }
+    .product { border:1px solid var(--line); border-radius:18px; padding:15px; background:var(--pale); }
+    .product h2 { margin:0 0 11px; font-size:1.05rem; color:var(--navy); }
+    .dose { display:flex; align-items:center; justify-content:space-between; gap:12px; background:#fff; border-radius:12px; padding:10px 12px; margin-top:8px; }
     .dose small { display:block; color:#58727b; margin-bottom:4px; }
-    .amount { color:var(--blue); font-size:1.55rem; font-weight:850; }
-    .formula { margin:20px 0 0; border-top:1px solid var(--line); padding-top:17px; color:#58727b; font-size:.88rem; line-height:1.55; }
+    .amount { color:var(--blue); font-size:1.25rem; font-weight:850; white-space:nowrap; }
+    .formula { margin:0; border-top:1px solid var(--line); padding-top:17px; color:#58727b; font-size:.78rem; line-height:1.5; }
     .warning { margin:16px 0 0; font-size:.82rem; color:#6a4f00; background:#fff6d9; border-radius:12px; padding:11px 13px; }
-    @media (max-width:560px) { .row,.products { grid-template-columns:1fr; } main { padding-top:24px; } }
+    @media (max-width:840px) { main { min-height:auto; grid-template-columns:1fr; padding:24px 0 40px; } .intro { padding:0 6px; } .products { grid-template-columns:1fr 1fr; } }
+    @media (max-width:600px) { .row,.products { grid-template-columns:1fr; } .dose { align-items:flex-end; } }
     @media print { body { background:#fff; } main { padding:0; } .card { box-shadow:none; } }
   </style>
 </head>
 <body>
   <main>
-    <div class="brand">AquaCraft · Ներքին գործիք աշխատակիցների համար</div>
-    <h1>Լողավազանի չափաբաժնի հաշվիչ</h1>
-    <p class="sub">Մուտքագրեք հաճախորդի ջրի քանակը՝ պարզելու, թե որքան ապրանք պետք է վաճառել։</p>
+    <div class="intro">
+      <div class="brand">AquaCraft · Ներքին գործիք</div>
+      <h1>Լողավազանի չափաբաժնի հաշվիչ</h1>
+      <p class="sub">Մուտքագրեք հաճախորդի ջրի քանակը՝ պարզելու, թե որքան ապրանք պետք է վաճառել։</p>
+      <p class="formula">Չափաբաժինները վերցված են ապրանքների պիտակներից։ Հաշվարկում ընդունվում է, որ 1 մետրիկ տոննա քաղցրահամ ջուրը ≈ 1 մ³ (1,000 լ)։</p>
+      <p class="warning">Միշտ հետևեք ապրանքի պիտակի հրահանգներին և ճշտեք՝ հաճախորդին անհրաժեշտ է սկզբնական, թե շաբաթական չափաբաժին։</p>
+    </div>
     <section class="card" aria-labelledby="calculator-title">
       <label id="calculator-title" for="volume">Լողավազանի ջրի քանակը</label>
       <div class="row">
@@ -68,8 +74,6 @@
           <div class="dose"><small>Շաբաթական սպասարկում</small><span class="amount" id="extraWeekly">2.5 մլ</span></div>
         </article>
       </div>
-      <p class="formula">Օգտագործված չափաբաժինները՝ Ալգիցիդ — սկզբնական՝ 1.5 լ/100 մ³, շաբաթական՝ 0.5 լ/100 մ³։ Հեղուկ ֆլոկուլյանտ — սկզբնական՝ 1 լ/100 մ³, շաբաթական՝ 0.25 լ/100 մ³։ CTX 500C Algastop Power — սկզբնական՝ 180 մլ/50 մ³, շաբաթական՝ 40 մլ/50 մ³։ Էքստրա ալգիցիդ — սկզբնական՝ 1 լ/100 մ³, շաբաթական՝ 0.25 լ/100 մ³։</p>
-      <p class="warning">Հաշվարկում ընդունվում է, որ 1 մետրիկ տոննա քաղցրահամ ջուրը ≈ 1 մ³ (1,000 լ)։ Միշտ հետևեք ապրանքի պիտակի հրահանգներին և ճշտեք՝ հաճախորդին անհրաժեշտ է սկզբնական, թե շաբաթական չափաբաժին։</p>
     </section>
   </main>
   <script>

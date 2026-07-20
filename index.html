@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="hy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AquaCraft — Լողավազանի քիմիական նյութերի հաշվիչ</title>
+  <style>
+    :root { color-scheme: light; --navy:#073b4c; --blue:#0b91c6; --pale:#eaf8fc; --line:#c7e4ec; --ink:#102a33; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--ink); background:linear-gradient(145deg,#f8fdff,#dff5fa); }
+    main { width:min(720px,calc(100% - 28px)); margin:0 auto; padding:36px 0 56px; }
+    .brand { color:var(--blue); font-size:.82rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    h1 { margin:8px 0 8px; color:var(--navy); font-size:clamp(2rem,6vw,3.5rem); line-height:1; }
+    .sub { margin:0 0 28px; color:#46646e; font-size:1.05rem; }
+    .card { background:#fff; border:1px solid rgba(7,59,76,.1); border-radius:24px; padding:clamp(20px,5vw,34px); box-shadow:0 20px 60px rgba(7,59,76,.12); }
+    label { display:block; margin-bottom:8px; font-weight:750; color:var(--navy); }
+    .row { display:grid; grid-template-columns:1fr 170px; gap:12px; margin-bottom:22px; }
+    input,select { width:100%; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--ink); padding:14px; font:inherit; }
+    input { font-size:1.2rem; font-weight:700; }
+    input:focus,select:focus { outline:3px solid rgba(11,145,198,.18); border-color:var(--blue); }
+    .products { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .product { border:1px solid var(--line); border-radius:18px; padding:18px; background:var(--pale); }
+    .product h2 { margin:0 0 15px; font-size:1.15rem; color:var(--navy); }
+    .dose { background:#fff; border-radius:13px; padding:13px; margin-top:10px; }
+    .dose small { display:block; color:#58727b; margin-bottom:4px; }
+    .amount { color:var(--blue); font-size:1.55rem; font-weight:850; }
+    .formula { margin:20px 0 0; border-top:1px solid var(--line); padding-top:17px; color:#58727b; font-size:.88rem; line-height:1.55; }
+    .warning { margin:16px 0 0; font-size:.82rem; color:#6a4f00; background:#fff6d9; border-radius:12px; padding:11px 13px; }
+    @media (max-width:560px) { .row,.products { grid-template-columns:1fr; } main { padding-top:24px; } }
+    @media print { body { background:#fff; } main { padding:0; } .card { box-shadow:none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">AquaCraft · Ներքին գործիք աշխատակիցների համար</div>
+    <h1>Լողավազանի չափաբաժնի հաշվիչ</h1>
+    <p class="sub">Մուտքագրեք հաճախորդի ջրի քանակը՝ պարզելու, թե որքան ապրանք պետք է վաճառել։</p>
+    <section class="card" aria-labelledby="calculator-title">
+      <label id="calculator-title" for="volume">Լողավազանի ջրի քանակը</label>
+      <div class="row">
+        <input id="volume" type="number" min="0" step="any" value="1" inputmode="decimal" aria-label="Լողավազանի ջրի քանակը">
+        <select id="unit" aria-label="Ջրի չափման միավորը">
+          <option value="ton">Մետրիկ տոննա</option>
+          <option value="m3">Խորանարդ մետր (մ³)</option>
+          <option value="liter">Լիտր</option>
+          <option value="gallon">ԱՄՆ գալոն</option>
+        </select>
+      </div>
+      <div class="products">
+        <article class="product">
+          <h2>Ալգիցիդ</h2>
+          <div class="dose"><small>Սկզբնական մշակում</small><span class="amount" id="algInitial">15 մլ</span></div>
+          <div class="dose"><small>Շաբաթական սպասարկում</small><span class="amount" id="algWeekly">5 մլ</span></div>
+        </article>
+        <article class="product">
+          <h2>Հեղուկ ֆլոկուլյանտ</h2>
+          <div class="dose"><small>Սկզբնական մշակում</small><span class="amount" id="flocInitial">10 մլ</span></div>
+          <div class="dose"><small>Շաբաթական սպասարկում</small><span class="amount" id="flocWeekly">2.5 մլ</span></div>
+        </article>
+      </div>
+      <p class="formula">Օգտագործված չափաբաժինները՝ Ալգիցիդ — սկզբնական՝ 1.5 լ/100 մ³, շաբաթական՝ 0.5 լ/100 մ³։ Հեղուկ ֆլոկուլյանտ — սկզբնական՝ 1 լ/100 մ³, շաբաթական՝ 0.25 լ/100 մ³։</p>
+      <p class="warning">Հաշվարկում ընդունվում է, որ 1 մետրիկ տոննա քաղցրահամ ջուրը ≈ 1 մ³ (1,000 լ)։ Միշտ հետևեք ապրանքի պիտակի հրահանգներին և ճշտեք՝ հաճախորդին անհրաժեշտ է սկզբնական, թե շաբաթական չափաբաժին։</p>
+    </section>
+  </main>
+  <script>
+    const volume = document.querySelector('#volume');
+    const unit = document.querySelector('#unit');
+    const factors = { ton: 1, m3: 1, liter: 0.001, gallon: 0.003785411784 };
+    const doses = { algInitial: 15, algWeekly: 5, flocInitial: 10, flocWeekly: 2.5 };
+    function formatMl(ml) {
+      if (!Number.isFinite(ml)) return '—';
+      if (ml >= 1000) return `${(ml / 1000).toLocaleString('hy-AM',{maximumFractionDigits:3})} լ`;
+      return `${ml.toLocaleString('hy-AM',{maximumFractionDigits:2})} մլ`;
+    }
+    function calculate() {
+      const cubicMeters = Math.max(0, Number(volume.value) || 0) * factors[unit.value];
+      Object.entries(doses).forEach(([id, mlPerM3]) => document.querySelector(`#${id}`).textContent = formatMl(cubicMeters * mlPerM3));
+    }
+    volume.addEventListener('input', calculate);
+    unit.addEventListener('change', calculate);
+    calculate();
+  </script>
+</body>
+</html>

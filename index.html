@@ -57,8 +57,18 @@
           <div class="dose"><small>Սկզբնական մշակում</small><span class="amount" id="flocInitial">10 մլ</span></div>
           <div class="dose"><small>Շաբաթական սպասարկում</small><span class="amount" id="flocWeekly">2.5 մլ</span></div>
         </article>
+        <article class="product">
+          <h2>CTX 500C Algastop Power</h2>
+          <div class="dose"><small>Սկզբնական մշակում</small><span class="amount" id="algastopInitial">3.6 մլ</span></div>
+          <div class="dose"><small>Շաբաթական սպասարկում</small><span class="amount" id="algastopWeekly">0.8 մլ</span></div>
+        </article>
+        <article class="product">
+          <h2>Էքստրա ալգիցիդ</h2>
+          <div class="dose"><small>Սկզբնական մշակում</small><span class="amount" id="extraInitial">10 մլ</span></div>
+          <div class="dose"><small>Շաբաթական սպասարկում</small><span class="amount" id="extraWeekly">2.5 մլ</span></div>
+        </article>
       </div>
-      <p class="formula">Օգտագործված չափաբաժինները՝ Ալգիցիդ — սկզբնական՝ 1.5 լ/100 մ³, շաբաթական՝ 0.5 լ/100 մ³։ Հեղուկ ֆլոկուլյանտ — սկզբնական՝ 1 լ/100 մ³, շաբաթական՝ 0.25 լ/100 մ³։</p>
+      <p class="formula">Օգտագործված չափաբաժինները՝ Ալգիցիդ — սկզբնական՝ 1.5 լ/100 մ³, շաբաթական՝ 0.5 լ/100 մ³։ Հեղուկ ֆլոկուլյանտ — սկզբնական՝ 1 լ/100 մ³, շաբաթական՝ 0.25 լ/100 մ³։ CTX 500C Algastop Power — սկզբնական՝ 180 մլ/50 մ³, շաբաթական՝ 40 մլ/50 մ³։ Էքստրա ալգիցիդ — սկզբնական՝ 1 լ/100 մ³, շաբաթական՝ 0.25 լ/100 մ³։</p>
       <p class="warning">Հաշվարկում ընդունվում է, որ 1 մետրիկ տոննա քաղցրահամ ջուրը ≈ 1 մ³ (1,000 լ)։ Միշտ հետևեք ապրանքի պիտակի հրահանգներին և ճշտեք՝ հաճախորդին անհրաժեշտ է սկզբնական, թե շաբաթական չափաբաժին։</p>
     </section>
   </main>
@@ -66,7 +76,16 @@
     const volume = document.querySelector('#volume');
     const unit = document.querySelector('#unit');
     const factors = { ton: 1, m3: 1, liter: 0.001, gallon: 0.003785411784 };
-    const doses = { algInitial: 15, algWeekly: 5, flocInitial: 10, flocWeekly: 2.5 };
+    const doses = {
+      algInitial: 15,
+      algWeekly: 5,
+      flocInitial: 10,
+      flocWeekly: 2.5,
+      algastopInitial: 3.6,
+      algastopWeekly: 0.8,
+      extraInitial: 10,
+      extraWeekly: 2.5
+    };
     function formatMl(ml) {
       if (!Number.isFinite(ml)) return '—';
       if (ml >= 1000) return `${(ml / 1000).toLocaleString('hy-AM',{maximumFractionDigits:3})} լ`;

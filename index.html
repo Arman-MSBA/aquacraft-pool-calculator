@@ -36,7 +36,8 @@
     .price-input { margin-bottom:22px; }
     .price-results { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
     .price-result { border:1px solid var(--line); border-radius:18px; padding:22px; background:linear-gradient(145deg,#f3fbfd,#e7f6fa); }
-    .price-result small { display:block; color:#58727b; font-weight:700; }
+    .price-result small { display:flex; align-items:baseline; gap:8px; color:#47666f; font-weight:750; }
+    .price-result small b { color:var(--navy); font-size:2rem; line-height:1; letter-spacing:-.04em; }
     .price-result strong { display:block; margin-top:8px; color:var(--blue); font-size:clamp(1.65rem,3vw,2.4rem); }
     .price-result span { display:block; margin-top:4px; color:var(--navy); font-size:.8rem; font-weight:750; }
     @media (max-width:980px) { main { min-height:auto; grid-template-columns:1fr; } .intro { min-height:auto; padding:42px max(24px,6vw); } .card { width:min(860px,calc(100% - 32px)); margin:28px 0; } .products { grid-template-columns:1fr 1fr; } h1 { font-size:clamp(2.3rem,8vw,3.8rem); } }
@@ -101,10 +102,10 @@
         <input id="cost" type="number" min="0" step="any" value="1000" inputmode="decimal" aria-label="Ապրանքի գնման գինը դրամով">
       </div>
       <div class="price-results">
-        <article class="price-result"><small>15% հավելագին</small><strong id="markup15">1,150 ֏</strong><span>Վաճառքի գին</span></article>
-        <article class="price-result"><small>20% հավելագին</small><strong id="markup20">1,200 ֏</strong><span>Վաճառքի գին</span></article>
-        <article class="price-result"><small>30% հավելագին</small><strong id="markup30">1,300 ֏</strong><span>Վաճառքի գին</span></article>
-        <article class="price-result"><small>40% հավելագին</small><strong id="markup40">1,400 ֏</strong><span>Վաճառքի գին</span></article>
+        <article class="price-result"><small><b>15%</b> հավելագին</small><strong id="markup15">1,150 ֏</strong><span>Վաճառքի գին</span></article>
+        <article class="price-result"><small><b>20%</b> հավելագին</small><strong id="markup20">1,200 ֏</strong><span>Վաճառքի գին</span></article>
+        <article class="price-result"><small><b>30%</b> հավելագին</small><strong id="markup30">1,300 ֏</strong><span>Վաճառքի գին</span></article>
+        <article class="price-result"><small><b>40%</b> հավելագին</small><strong id="markup40">1,400 ֏</strong><span>Վաճառքի գին</span></article>
       </div>
     </section>
   </main>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AquaCraft — Լողավազանի քիմիական նյութերի հաշվիչ</title>
+  <title>AquaCraft — Ներքին գործիքներ</title>
   <style>
     :root { color-scheme: light; --navy:#06384a; --blue:#11aee2; --pale:#edf9fc; --line:#cce8ef; --ink:#102a33; }
     * { box-sizing: border-box; }
@@ -28,9 +28,12 @@
     .formula { max-width:480px; margin:0; border-top:1px solid rgba(255,255,255,.2); padding-top:22px; color:#a9ced8; font-size:.8rem; line-height:1.55; }
     .warning { max-width:480px; margin:18px 0 0; font-size:.82rem; line-height:1.45; color:#ffe29a; background:rgba(255,194,51,.1); border:1px solid rgba(255,214,112,.18); border-radius:12px; padding:12px 14px; }
     .tool-nav { display:grid; gap:10px; margin:4px 0 34px; }
-    .tool-tab { width:100%; border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:13px 16px; color:#c7e5ed; background:rgba(255,255,255,.06); font:inherit; font-weight:750; text-align:left; cursor:pointer; transition:.18s ease; }
+    .tool-tab { width:100%; min-height:48px; border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:13px 16px; display:flex; align-items:center; justify-content:space-between; gap:14px; color:#c7e5ed; background:rgba(255,255,255,.06); font:inherit; font-weight:750; text-align:left; text-decoration:none; cursor:pointer; transition:.18s ease; }
     .tool-tab:hover { background:rgba(255,255,255,.11); }
     .tool-tab.active { color:var(--navy); background:#fff; border-color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.16); }
+    .inventory-link { color:#052d3d; background:#4bd0f4; border-color:#4bd0f4; box-shadow:0 12px 34px rgba(17,174,226,.22); }
+    .inventory-link:hover { background:#7cdef7; border-color:#7cdef7; transform:translateY(-1px); }
+    .inventory-link span { font-size:1.15rem; line-height:1; }
     .tool-panel[hidden], .side-note[hidden] { display:none; }
     .panel-title { margin:0 0 20px; color:var(--navy); font-size:1.55rem; }
     .price-input { margin-bottom:22px; }
@@ -49,8 +52,9 @@
   <main>
     <div class="intro">
       <div class="brand">AquaCraft · Ներքին գործիք</div>
-      <h1>AquaCraft հաշվիչներ</h1>
-      <nav class="tool-nav" role="tablist" aria-label="Հաշվիչների ընտրություն">
+      <h1>AquaCraft գործիքներ</h1>
+      <nav class="tool-nav" aria-label="AquaCraft գործիքների ընտրություն">
+        <a class="tool-tab inventory-link" href="inventory.html">Պահեստի վահանակ <span aria-hidden="true">→</span></a>
         <button class="tool-tab active" type="button" role="tab" aria-selected="true" aria-controls="dose-panel" data-panel="dose-panel">Չափաբաժնի հաշվիչ</button>
         <button class="tool-tab" type="button" role="tab" aria-selected="false" aria-controls="price-panel" data-panel="price-panel">Վաճառքի գնի հաշվիչ</button>
       </nav>
@@ -140,10 +144,10 @@
         document.querySelector(`#markup${percent}`).textContent = `${price.toLocaleString('hy-AM',{maximumFractionDigits:2})} ֏`;
       });
     }
-    document.querySelectorAll('.tool-tab').forEach((tab, index) => {
+    document.querySelectorAll('.tool-tab[data-panel]').forEach((tab, index) => {
       tab.id = index === 0 ? 'dose-tab' : 'price-tab';
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.tool-tab').forEach(item => {
+        document.querySelectorAll('.tool-tab[data-panel]').forEach(item => {
           const selected = item === tab;
           item.classList.toggle('active', selected);
           item.setAttribute('aria-selected', selected);
